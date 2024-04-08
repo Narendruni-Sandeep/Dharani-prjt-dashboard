@@ -1,0 +1,176 @@
+function clearAndSetActive(activeElementId) {
+    document.querySelector('.navigation .active').classList.remove('active');
+    document.getElementById(activeElementId).classList.add('active');
+    document.getElementById('main-content').innerHTML = '';
+}
+
+function initializeGauges() {
+    document.getElementById('main-content').innerHTML = `
+  <div class="content">
+    <div class="gauge-container">
+      <div class="gauge" id="voltage-gauge"></div>
+      <div class="label">AC Voltage</div>
+    </div>
+    <div class="gauge-container">
+      <div class="gauge" id="current-gauge"></div>
+      <div class="label">AC Current</div>
+    </div>
+    <div class="gauge-container">
+      <div class="gauge" id="power-gauge"></div>
+      <div class="label">Power</div>
+    </div>
+    <div class="gauge-container">
+      <div class="gauge" id="angle-gauge"></div>
+      <div class="label">Panel Angle</div>
+    </div>
+    <div class="gauge-container">
+      <div class="gauge" id="frequency-gauge"></div>
+      <div class="label">Frequency</div>
+    </div>
+    <div class="gauge-container">
+      <div class="gauge" id="energy-gauge"></div>
+      <div class="label">Energy</div>
+    </div>
+  </div>
+`;
+
+    new JustGage({
+        id: "voltage-gauge",
+        value: 24,
+        min: 0,
+        max: 100,
+        title: "Voltage",
+        label: "Volts"
+    });
+    new JustGage({
+        id: "current-gauge",
+        value: 5,
+        min: 0,
+        max: 100,
+        title: "Current",
+        label: "Amps"
+    });
+    new JustGage({
+        id: "power-gauge",
+        value: 10,
+        min: 0,
+        max: 100,
+        title: "Power",
+        label: "Watts"
+    });
+    new JustGage({
+        id: "angle-gauge",
+        value: 45,
+        min: 0,
+        max: 180,
+        title: "Angle",
+        label: "Degrees"
+    });
+    new JustGage({
+        id: "frequency-gauge",
+        value: 60,
+        min: 0,
+        max: 100,
+        title: "Frequency",
+        label: "Hz"
+    });
+    new JustGage({
+        id: "energy-gauge",
+        value: 50,
+        min: 0,
+        max: 100,
+        title: "Energy",
+        label: "kWh"
+    });
+}
+
+document.getElementById('about-us').addEventListener('click', function() {
+    clearAndSetActive('about-us');
+    document.getElementById('main-content').innerHTML = `
+    <div class="content">
+        <div class="profile-container">
+            <img src="rojamam.jpg" alt="Rojamam" class="profile-image">
+            <div class="profile-info">
+                <h3>Rojamam</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+        <div class="profile-container">
+            <img src="dharani.jpg" alt="Dharani" class="profile-image">
+            <div class="profile-info">
+                <h3>Dharani</h3>
+                <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+        <div class="profile-container">
+            <img src="deepu.jpg" alt="Deepu" class="profile-image">
+            <div class="profile-info">
+                <h3>Deepu</h3>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </div>
+        <div class="profile-container">
+            <img src="vamsi.jpg" alt="Vamsi" class="profile-image">
+            <div class="profile-info">
+                <h3>Vamsi</h3>
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            </div>
+        </div>
+        <div class="profile-container">
+            <img src="satya.jpg" alt="Satya" class="profile-image">
+            <div class="profile-info">
+                <h3>Satya</h3>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+        </div>
+        <div class="profile-container">
+            <img src="dharma.jpg" alt="Dharma" class="profile-image">
+            <div class="profile-info">
+                <h3>Dharma</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+    </div>
+`;
+});
+
+document.getElementById('dashboard').addEventListener('click', function() {
+    clearAndSetActive('dashboard');
+    initializeGauges();
+});
+
+document.getElementById('about-project').addEventListener('click', function() {
+    clearAndSetActive('about-project');
+    document.getElementById('main-content').innerHTML = `
+    <div style="text-align: center;">
+        <img src="panel.jpg" alt="Solar Panel" style="max-width: 100%;">
+        <img src="slope.jpg" alt="Slope" style="max-width: 100%; margin-top: 20px;">
+    </div>
+    <div style="text-align: center" class="abstract">
+        <h2 style="margin-top: 20px;">Abstract</h2>
+        <p style="text-align: justify;">This project introduces an IoT-based remoting and controlling of solar panel designed for the purpose of utilizing renewable energy sources to save electricity. The solar system utilizes solar power and saves the solar power in the battery and UPS. An ESP32 controller, in conjunction with MPPT charge controller, provides precise control over the solar panel, ensuring effective maximum power consumption. Additionally, the solar panel overall movement and performance is observed through a webpage in which all the current, power, load, energy everything is displayed as we use PZEM 004t which is connected to the ESP32 controller.
+        The solar panel is charges the battery by UPS and it works as backup when the power is off and solar power is accessed to the room. Here, we use MPPT charge controller and motor, for tilting the solar panel at which the maximum power is absorbed, the maximum power at which direction is known by using MPPT charge controller, it automatically tilts at which the maximum power is observed. We also use gyrometer to know at which angle is the solar panel.
+        Furthermore, this all information is displayed in the webpage through IOT cloud. This integration enables remote monitoring and control of solar operations. Here we use React JS to create a webpage and to display the data we use IOT.
+        This project represents a significant advancement in IoT-based solutions for renewable energy sources, so that it could re-used in the form of electricity. The integration of a solar panel, MPPT charge controller, ESP32, PZEM 004t, gyrometer and IoT Cloud technology  automatically shows the energy that we can re-use by using solar energy.
+        KEYWORDS: IoT (Internet of Things), Solar Panel, Motors, ESP32, PZEM 004t, gyrometer, IoT Cloud, Solar Power, Renewable energy resources, Remote Monitoring, webpage, MPPT charge controller, Real-time, Smart Technologies.</p>
+    </div>
+    <div class="components">
+        <h2 class="componentsusedh">Components Used</h2>
+        <p style="text-align: justify;">
+                Solar panel polycrystalline 12v,50watts<br>
+MPPT charge controller<br>
+Servo motor<br>
+Motor driver<br>
+ESP32 WROOM<br>
+Gyrometer<br>
+Battery 12v, 18amp<br>
+UPS<br>
+PZEM-004T<br>
+Umpercables<br>
+        </p>
+    </div>
+`;
+});
+
+// Initialize the dashboard view on page load
+initializeGauges();
